@@ -1,189 +1,180 @@
-# **Full-Stack Developer Test – ChatGPT Clone**
+# Turing Task - Backend API
 
-This test is a part of our hiring process at TuringTech for [fullstack positions](https://turingtechnologies.org/careers). It should take you between 5-6 hours depending on your experience.
+Backend API for the ChatGPT clone application built with Express.js, MongoDB, and JWT authentication.
 
-Hope you will have as much fun as we did coding this test!
+## Features
 
-## **Objective**
+- ✅ User authentication (Email/Password & Google OAuth)
+- ✅ Chat management (Create, Read, Update, Delete chats)
+- ✅ Message handling with simulated LLM responses
+- ✅ LLM Service with 10-20 second simulated delay
+- ✅ User ownership enforcement (users can only access their own chats/messages)
+- ✅ JWT-based authentication
+- ✅ MongoDB database with Mongoose
 
-Build a simplified ChatGPT-like application with a **Next.js frontend** and a **backend of your choice** (**NestJS preferred**).
+## Tech Stack
 
-The goal of this test is to evaluate your ability to design and implement:
+- **Framework:** Express.js
+- **Database:** MongoDB with Mongoose
+- **Authentication:** JWT + Google OAuth
+- **Password Hashing:** bcryptjs
 
-- **Frontend state management** (handling chat sessions, loading states, UI updates)
-- **Backend architecture** (API design, async request handling, secure communication)
-- **Database design** (chat persistence, user ownership of data)
-- **Authentication integration** (either Supabase or custom)
+## Prerequisites
 
----
+- Node.js (v14 or higher)
+- MongoDB (local or MongoDB Atlas)
+- Google OAuth credentials (for Google login)
 
-### **1. Authentication (Supabase Preferred)**
+## Installation
 
-- **Option 1 – Supabase Auth (Preferred):**
-
-  - Email/password registration & login
-  - Google login (OAuth)
-  - Protect all chat-related pages
-  - Integrate Supabase session into frontend and backend authorization
-
-- **Option 2 – Custom Auth:**
-
-  - Implement your own authentication system (JWT, sessions, password hashing, etc.)
-  - Protect chat-related pages and API routes
-  - Document your authentication approach
-
----
-
-### **2. Frontend (Next.js App)**
-
-- **Framework:** **Next.js (mandatory)**
-
-- **Preferred configuration:** App Router, TypeScript, TailwindCSS v4, ShadCN UI
-
-- **Pages / Screens to implement (must follow provided Figma designs):**
-
-  1. Login
-  2. Signup
-  3. Main chat screen with sidebar (chat history shown in sidebar)
-  4. Chat details screen (conversation view)
-
-- **Requirements:**
-
-  - Follow the Figma designs exactly:
-    [Figma – UI Screens](https://www.figma.com/design/nCJlqmFsnupB4yVeW2dtuS/Turing-Tech-Test?node-id=1-2&t=Fa8KJAfH1zGxYfaY-1)
-  - Display chat history in the sidebar for the logged-in user
-  - **All chat messages must be sent to and retrieved from the backend.**
-
-    - Candidates must **not hardcode mock responses in the frontend**.
-    - The backend (with simulated delay) should be the single source of truth for chat replies.
-
-  - Handle **long-running LLM responses (10–20 sec)** gracefully
-  - Proper state management (React Context, React Query, Zustand, etc.)
-  - Persist session across refreshes
-
----
-
-### **3. Backend**
-
-- **Framework:** Candidate may use any backend framework (**NestJS preferred**)
-
-- **Authentication:** Supabase token verification preferred (custom auth allowed if implemented correctly)
-
-- **Responsibilities:**
-
-  - Handle chat and message storage for each user
-  - Ensure users can only access their own chats and messages
-  - Provide APIs for sending user messages and receiving simulated LLM replies
-
-- **LLM Integration Simulation (Important):**
-  In a real system, the backend would call an **external LLM service** (e.g., OpenAI API) using an endpoint like `LLM_API_URL`.
-  For this test, you **do not have an actual LLM service**. Instead, you must **simulate the integration inside your backend service layer**.
-
-  **What this means in practice:**
-
-  1. **Service abstraction:**
-
-     - Implement an `LLMService` (or equivalent) that _pretends_ to call an LLM endpoint.
-     - Structure it as if you were making a real HTTP request (e.g., using Axios/HttpService, passing tokens/headers, handling timeouts).
-
-  2. **Simulated response:**
-
-     - Introduce a **random delay of 10–20 seconds** before sending back a response.
-     - The **response content can be hardcoded**, but should be **longer, multi-sentence text** to demonstrate how the frontend handles delayed output.
-
-     Example response:
-
-     ```json
-     {
-       "message": "Here is a multi-sentence simulated AI reply. Imagine this came from a real LLM service..."
-     }
-     ```
-
-  3. **Async handling:**
-
-     - Ensure this delay does **not block other requests**.
-
-  4. **No frontend mocking:**
-
-     - All AI responses must come **via backend simulation**.
-     - Do **not hardcode bot replies in the frontend**.
-
----
-
-### **4. Database**
-
-- If using **Supabase for authentication**, it is preferred that you also use Supabase for storing users, chats, and messages.
-- If not using Supabase, **MongoDB is preferred**. Other databases are acceptable if justified.
-- You are expected to design a **clean, well-structured schema** that satisfies the requirements of:
-
-  - Storing users and their chats
-  - Persisting messages within chats
-  - Enforcing ownership (users can only access their own chats/messages)
-
----
-
-### **5. Frontend-Backend Interaction**
-
-- Frontend calls backend APIs for chat creation, fetching chat lists, and sending messages
-- Must handle **long-running responses gracefully**:
-
-  - Prevent duplicate sends
-  - Allow navigating other pages while waiting
-
----
-
-### **6. Optional / Bonus**
-
-- Streaming responses (progressive display)
-- Edit/delete messages
-- Search/filter chats
-- Retry logic for failed LLM calls
-
----
-
-## **Deliverables**
-
-1. **Code Repositories**
-
-   - Push your code to your own **public GitHub/GitLab repositories**
-   - **Frontend and backend must be in separate repos** (if applicable)
-   - Create a **merge request (MR)** in each repo
-   - Share the **repo links and MR links** with us for review
-   - Each repo must include a **README** with setup instructions and an `.env.example` file
-
-2. **Video Walkthrough (Mandatory)**
-
-   - Record a **Loom video** walking through your implementation
-   - Cover:
-
-     - Authentication approach (Supabase or custom)
-     - State management strategy
-     - LLM integration & async handling
-     - Handling of long-running responses
-     - Code structure & trade-offs
-
-   - Show the app running and demonstrate its functionality
-
-3. **Deployment (Preferred, not required)**
-
-   - Deploy the frontend (e.g., Vercel)
-   - Deploy the backend (e.g., AWS, Render, Railway, etc.)
-   - Share live demo links if deployed
-
----
-
-### **Key Notes**
-
-- **Simulate LLM delay:** backend must introduce a **random 10–20s delay** before sending the bot reply
-- Backend must **not block other requests** while waiting
-- Streaming/progressive response handling is encouraged
-- All API endpoints must be **authenticated and secure**
-
----
-
-## Code Submit
-Please organize, design, test and document your code as if it were going into production. Fork this repository and send us link to your repository. We will review it and get back to you in order to talk about your code!
-
-__Feel free to apply! Drop us a line with your Linkedin/Github/AnySocialProfileWhereYouAreActive at hr@turingtechnologies.org__
-
-All the best and happy coding.
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the root directory:
+   ```env
+   PORT=3000
+   FRONTEND_URL=http://localhost:3000,http://localhost:3001
+   MONGODB_URI=mongodb://localhost:27017/chatgpt-clone
+   JWT_SECRET=your-super-secret-jwt-key
+   JWT_EXPIRE=7d
+   GOOGLE_CLIENT_ID=your-google-client-id
+   GOOGLE_CLIENT_SECRET=your-google-client-secret
+   ```
+   
+   **Note:** `FRONTEND_URL` can be a comma-separated list of allowed origins for CORS. If not set, defaults to common localhost ports.
+
+4. Start the server:
+   ```bash
+   # Development mode
+   npm run dev
+
+   # Production mode
+   npm start
+   ```
+
+## API Endpoints
+
+### Authentication
+
+- `POST /api/auth/register` - Register new user (email/password)
+- `POST /api/auth/login` - Login user (email/password)
+- `POST /api/auth/google` - Google OAuth authentication
+
+### Chats
+
+- `GET /api/chats` - Get all chats for authenticated user
+- `GET /api/chats/:chatId` - Get chat with messages
+- `POST /api/chats` - Create new chat
+- `PUT /api/chats/:chatId` - Update chat title
+- `DELETE /api/chats/:chatId` - Delete chat and all messages
+
+### Messages
+
+- `GET /api/chats/:chatId/messages` - Get all messages in a chat
+- `POST /api/chats/:chatId/messages` - Send a message (triggers LLM response)
+
+### Health Check
+
+- `GET /api/health` - Server health check
+
+## Authentication
+
+All chat and message endpoints require authentication. Include the JWT token in the Authorization header:
+
+```
+Authorization: Bearer <your-jwt-token>
+```
+
+## LLM Simulation
+
+The backend includes a simulated LLM service that:
+- Introduces a random 10-20 second delay before responding
+- Returns hardcoded multi-sentence responses
+- Processes requests asynchronously (non-blocking)
+- Saves assistant messages to the database
+
+**Important:** After sending a message, the frontend should poll `GET /api/chats/:chatId/messages` to retrieve the LLM response once it's ready.
+
+## Database Schema
+
+### User
+- `name` (String, required)
+- `email` (String, required, unique)
+- `password` (String, optional - for local auth)
+- `googleId` (String, optional, unique)
+- `avatar` (String, optional)
+- `provider` (String, enum: ['local', 'google'], default: 'local')
+- `timestamps` (createdAt, updatedAt)
+
+### Chat
+- `title` (String, default: 'New Chat')
+- `userId` (ObjectId, ref: User, required)
+- `timestamps` (createdAt, updatedAt)
+
+### Message
+- `chatId` (ObjectId, ref: Chat, required)
+- `role` (String, enum: ['user', 'assistant'], required)
+- `content` (String, required)
+- `timestamps` (createdAt, updatedAt)
+
+## Project Structure
+
+```
+.
+├── config/
+│   └── database.js          # MongoDB connection
+├── controllers/
+│   ├── authController.js    # Authentication controllers
+│   ├── chatController.js    # Chat controllers
+│   └── messageController.js # Message controllers
+├── middleware/
+│   └── auth.js              # JWT authentication middleware
+├── models/
+│   ├── User.js              # User model
+│   ├── Chat.js              # Chat model
+│   └── Message.js           # Message model
+├── routes/
+│   ├── authRoutes.js        # Authentication routes
+│   ├── chatRoutes.js        # Chat routes
+│   └── messageRoutes.js     # Message routes
+├── services/
+│   ├── authService.js      # Authentication logic
+│   ├── chatService.js       # Chat business logic
+│   ├── messageService.js    # Message business logic
+│   └── llmService.js        # LLM simulation service
+├── utils/
+│   └── jwt.js               # JWT token utilities
+├── server.js                # Express app entry point
+└── package.json
+```
+
+## Security
+
+- Passwords are hashed using bcryptjs
+- JWT tokens are used for authentication
+- User ownership is enforced at the service layer
+- All chat/message endpoints require authentication
+- CORS is configured for frontend origin
+
+## Error Handling
+
+All endpoints return consistent error responses:
+
+```json
+{
+  "success": false,
+  "message": "Error message here"
+}
+```
+
+## Development
+
+The server runs on `http://localhost:3000` by default (configurable via `PORT` env variable).
+
+For development with auto-reload:
+```bash
+npm run dev
+```
