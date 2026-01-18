@@ -9,9 +9,9 @@ export const PlusIcon = () => (
 
 export const SendIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g clip-path="url(#clip0_238_9)">
-      <path d="M18.3334 1.66675L9.16675 10.8334" stroke="#525252" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M18.3334 1.66675L12.5001 18.3334L9.16675 10.8334L1.66675 7.50008L18.3334 1.66675Z" stroke="#525252" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <g clipPath="url(#clip0_238_9)">
+      <path d="M18.3334 1.66675L9.16675 10.8334" stroke="#525252" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M18.3334 1.66675L12.5001 18.3334L9.16675 10.8334L1.66675 7.50008L18.3334 1.66675Z" stroke="#525252" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </g>
     <defs>
       <clipPath id="clip0_238_9">
